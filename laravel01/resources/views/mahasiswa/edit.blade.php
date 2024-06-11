@@ -14,6 +14,7 @@
             </p>
             <form method="POST" action="{{ route('mahasiswa.update', $mahasiswa['id']) }}" 
             class ="forms-sample" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
             <div class="form-group">
                 <label for="nama">NPM</label>

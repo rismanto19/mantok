@@ -141,7 +141,7 @@
             <a class="navbar-brand brand-logo" href="{{ url('index.html"><img src="images/logo.svg') }}" alt="logo"/></a>
             <a class="navbar-brand brand-logo-mini" href="{{ url('index.html"><img src="images/logo-mini.svg') }}" alt="logo"/></a>
           </div>
-          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, JAMAL BABY</h4>
+          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, {{auth()->user()->name}} </h4>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">
               <h4 class="mb-0 font-weight-bold d-none d-xl-block">Mar 12, 2019 - Apr 10, 2019</h4>
@@ -256,17 +256,22 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                 <img src="{{ url('images/faces/face5.jpg') }}" alt="profile"/>
-                <span class="nav-profile-name">Eleanor Richardson</span>
+                <span class="nav-profile-name">{{auth()->user()->name}} </span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item">
                   <i class="mdi mdi-settings text-primary"></i>
                   Settings
                 </a>
-                <a class="dropdown-item">
-                  <i class="mdi mdi-logout text-primary"></i>
-                  Logout
-                </a>
+                 <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();" class="dropdown-item" >
+                                          <i class="mdi mdi-logout text-primary"></i> {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
               </div>
             </li>
             <li class="nav-item">
